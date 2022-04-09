@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <cstring>
 #include "Image.h"
+#include <cmath>
 
 
 
@@ -93,7 +94,29 @@ void Image::filterBlue()
 }
 void Image::greyScale()
 {
+//    int x = 1;
+//    int r = this->pixels[x].r;
+//    int g = this->pixels[x].g;
+//    int b = this->pixels[x].b;
+//    cout << "r value : " << r << endl;
+//    cout << "g value : " << g << endl;
+//    cout << "b value : " << b << endl;
+//    double greyedPre = (double)(r + g + b) / 3;
+//    int answer = round(greyedPre);
+//    cout << "greyed value : " << answer << endl;
+    for(int i = 0; i < h*w; i++)
+    {
+        int r = this->pixels[i].r;
+        int g = this->pixels[i].g;
+        int b = this->pixels[i].b;
 
+        double greyed_unrounded = (double)(r + g + b) / 3;
+        int greyed_rounded = round(greyed_unrounded);
+
+        this->pixels[i].r = greyed_rounded;
+        this->pixels[i].g = greyed_rounded;
+        this->pixels[i].b = greyed_rounded;
+    }
 }
 void Image::flipHorizontal()
 {
