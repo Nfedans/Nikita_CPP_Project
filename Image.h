@@ -50,6 +50,7 @@ public:
     void AdditionalFunction1();
     void AdditionalFunction2();
     void AdditionalFunction3();
+    Image& operator=(const Image &ref);
 
     /*Functions used in the GUI - DO NOT MODIFY */
     Rgb* getImage();
@@ -57,6 +58,12 @@ public:
     int getHeight();
     ~Image() { if (pixels != nullptr) delete [] pixels; }
 
+    Image(const unsigned int _w, const unsigned int _h, bool _side) :
+            w(_w), h(_h), pixels(nullptr)
+    {
+        pixels = new Rgb[h * w];
+
+    }
 };
 
 

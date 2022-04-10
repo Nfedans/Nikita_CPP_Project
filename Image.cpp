@@ -180,7 +180,29 @@ void Image::flipVertically()
 }
 void Image::AdditionalFunction2()
 {
+    Image sideFlipped = Image(w,h);
+    for(int x= 0; x < h; ++x)
+    {
+        for(int y = 0; y < w; ++y)
+        {
+            unsigned int destination = (y * h) + (h - x - 1);
+            sideFlipped.pixels[destination] = pixels[(x * w) + y];
+        }
+    }
+*this = sideFlipped;
+}
 
+Image& Image::operator=(const Image &reference)
+{
+    if(this != &reference) {
+        w = reference.w;
+        h = reference.h;
+        pixels = new Rgb[w * h];
+        for(int i = 0; i < w * h; ++i) {
+            pixels[i] = reference.pixels[i];
+        }
+    }
+    return *this;
 }
 void Image::AdditionalFunction3()
 {
@@ -188,6 +210,26 @@ void Image::AdditionalFunction3()
 }
 void Image::AdditionalFunction1()
 {
+    //Rotate image 180
+    //Idea is that the array of pixels is reversed
+
+    int pixels[3];
+    unsigned int mirror;
+    unsigned int size = h*w;
+    for(int i = 0; i < (size / 2); ++i)
+    {
+        mirror = size - i;
+
+        pixels[0] = this->pixels[i].r;
+        pixels[1] = this->pixels[i].g;
+        pixels[2] = this->pixels[i].b;
+
+        this->pixels[i] = this->pixels[mirror];
+
+        this->pixels[mirror].r = pixels[0];
+        this->pixels[mirror].g = pixels[1];
+        this->pixels[mirror].b = pixels[2];
+    }
 
 }
 
