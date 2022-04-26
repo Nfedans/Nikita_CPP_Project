@@ -50,6 +50,8 @@ public:
     void AdditionalFunction1();
     void AdditionalFunction2();
     void AdditionalFunction3();
+    void gamma();
+    void Feature10();
     Image& operator=(const Image &ref);
 
     /*Functions used in the GUI - DO NOT MODIFY */

@@ -287,6 +287,41 @@ void Image::AdditionalFunction1()
 
 }
 
+void Image::gamma()
+{
+    float gamma=1/2.2f;
+    for (int i = 0; i < w * h; i++)
+    {
+        pixels[i].r = pow(pixels[i].r / 255.0f, gamma) * 255;
+        pixels[i].g = pow(pixels[i].g / 255.0f, gamma) * 255;
+        pixels[i].b = pow(pixels[i].b / 255.0f, gamma) * 255;
+    }
+}
+
+void Image::Feature10()
+{
+    int pixels[3];
+    int adjustment = 200;
+    unsigned int size = h*w;
+    for(int i = 0; i < size; i++)
+    {
+
+        pixels[0] = this->pixels[i].r;
+        pixels[1] = this->pixels[i].g;
+        pixels[2] = this->pixels[i].b;
+
+        // 4 steps in equations below for each colour channel in pixels
+        // 1) convert from int to float
+        // 2) divide by adjustment
+        // 3) get arccosine
+        // 4) multiply by adjustment
+        this->pixels[i].r = (acos(((pixels[0] / 255.0f) * 255)/adjustment))*adjustment;
+        this->pixels[i].g = (acos(((pixels[1] / 255.0f) * 255)/adjustment))*adjustment;
+        this->pixels[i].b = (acos(((pixels[2] / 255.0f) * 255)/adjustment))*adjustment;
+    }
+    
+}
+
 /* Functions used by the GUI - DO NOT MODIFY */
 int Image::getWidth()
 {
